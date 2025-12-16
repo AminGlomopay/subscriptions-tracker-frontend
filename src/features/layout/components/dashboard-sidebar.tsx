@@ -1,16 +1,6 @@
-import { PiBank, PiHouse } from 'react-icons/pi';
-
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/ui/sidebar';
-import { Link } from '@tanstack/react-router';
 import { FC } from 'react';
+import { PiBank, PiHouse } from 'react-icons/pi';
+import { Link } from '@tanstack/react-router';
 
 const items = [
   {
@@ -19,7 +9,7 @@ const items = [
     icon: PiHouse,
   },
   {
-    title: 'Department',
+    title: 'Departments',
     url: '/departments',
     icon: PiBank,
   },
@@ -27,25 +17,18 @@ const items = [
 
 export const DashboardSidebar: FC = () => {
   return (
-    <Sidebar>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link to={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+    <div>
+      {items.map((item, idx) => (
+        <Link
+          key={idx}
+          to={item.url}
+          className='flex items-center px-4 py-2 gap-x-3'
+        >
+          <item.icon />
+
+          <span>{item.title}</span>
+        </Link>
+      ))}
+    </div>
   );
 };
