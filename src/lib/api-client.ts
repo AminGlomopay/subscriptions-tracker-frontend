@@ -204,4 +204,6 @@ class ApiClient {
   }
 }
 
-export default ApiClient;
+export const apiClient = new ApiClient({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+});

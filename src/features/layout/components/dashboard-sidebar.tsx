@@ -1,4 +1,4 @@
-import { PiHouse } from 'react-icons/pi';
+import { PiBank, PiHouse } from 'react-icons/pi';
 
 import {
   Sidebar,
@@ -18,11 +18,11 @@ const items = [
     url: '/',
     icon: PiHouse,
   },
-  // {
-  //   title: 'Department',
-  //   url: '/departments',
-  //   icon: PiBank,
-  // },
+  {
+    title: 'Department',
+    url: '/departments',
+    icon: PiBank,
+  },
 ] as const;
 
 export const DashboardSidebar: FC = () => {
