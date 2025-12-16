@@ -9,68 +9,97 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as DepartmentsRouteImport } from './routes/departments'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as dashboardLayoutRouteRouteImport } from './routes/(dashboard)/_layout/route'
+import { Route as dashboardLayoutIndexRouteImport } from './routes/(dashboard)/_layout/index'
+import { Route as dashboardLayoutDepartmentsRouteImport } from './routes/(dashboard)/_layout/departments'
 
-const DepartmentsRoute = DepartmentsRouteImport.update({
-  id: '/departments',
-  path: '/departments',
+const dashboardLayoutRouteRoute = dashboardLayoutRouteRouteImport.update({
+  id: '/(dashboard)/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const dashboardLayoutIndexRoute = dashboardLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => dashboardLayoutRouteRoute,
 } as any)
+const dashboardLayoutDepartmentsRoute =
+  dashboardLayoutDepartmentsRouteImport.update({
+    id: '/departments',
+    path: '/departments',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/departments': typeof DepartmentsRoute
+  '/departments': typeof dashboardLayoutDepartmentsRoute
+  '/': typeof dashboardLayoutIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/departments': typeof DepartmentsRoute
+  '/departments': typeof dashboardLayoutDepartmentsRoute
+  '/': typeof dashboardLayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/departments': typeof DepartmentsRoute
+  '/(dashboard)/_layout': typeof dashboardLayoutRouteRouteWithChildren
+  '/(dashboard)/_layout/departments': typeof dashboardLayoutDepartmentsRoute
+  '/(dashboard)/_layout/': typeof dashboardLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/departments'
+  fullPaths: '/departments' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/departments'
-  id: '__root__' | '/' | '/departments'
+  to: '/departments' | '/'
+  id:
+    | '__root__'
+    | '/(dashboard)/_layout'
+    | '/(dashboard)/_layout/departments'
+    | '/(dashboard)/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  DepartmentsRoute: typeof DepartmentsRoute
+  dashboardLayoutRouteRoute: typeof dashboardLayoutRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/departments': {
-      id: '/departments'
-      path: '/departments'
-      fullPath: '/departments'
-      preLoaderRoute: typeof DepartmentsRouteImport
+    '/(dashboard)/_layout': {
+      id: '/(dashboard)/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof dashboardLayoutRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/(dashboard)/_layout/': {
+      id: '/(dashboard)/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof dashboardLayoutIndexRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
+    '/(dashboard)/_layout/departments': {
+      id: '/(dashboard)/_layout/departments'
+      path: '/departments'
+      fullPath: '/departments'
+      preLoaderRoute: typeof dashboardLayoutDepartmentsRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
     }
   }
 }
 
+interface dashboardLayoutRouteRouteChildren {
+  dashboardLayoutDepartmentsRoute: typeof dashboardLayoutDepartmentsRoute
+  dashboardLayoutIndexRoute: typeof dashboardLayoutIndexRoute
+}
+
+const dashboardLayoutRouteRouteChildren: dashboardLayoutRouteRouteChildren = {
+  dashboardLayoutDepartmentsRoute: dashboardLayoutDepartmentsRoute,
+  dashboardLayoutIndexRoute: dashboardLayoutIndexRoute,
+}
+
+const dashboardLayoutRouteRouteWithChildren =
+  dashboardLayoutRouteRoute._addFileChildren(dashboardLayoutRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  DepartmentsRoute: DepartmentsRoute,
+  dashboardLayoutRouteRoute: dashboardLayoutRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
