@@ -4,8 +4,11 @@ import { DepartmentsList } from '../components/departments-list';
 
 export const DepartmentsListPage: FC = () => {
   return (
-    <Suspense fallback={<>Loading...</>}>
-      <DepartmentsList />
+    <Suspense fallback={<div>Loading...</div>}>
+      <div>
+        <h1>Departments</h1>
+        <DepartmentsList />
+      </div>
     </Suspense>
   );
 };
