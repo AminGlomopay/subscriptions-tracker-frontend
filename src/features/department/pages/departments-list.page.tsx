@@ -2,6 +2,7 @@ import { FC, Suspense } from 'react';
 
 import { DepartmentsList } from '../components/departments-list';
 import { Button } from '@/ui/button';
+import { Link } from '@tanstack/react-router';
 
 export const DepartmentsListPage: FC = () => {
   return (
@@ -10,7 +11,9 @@ export const DepartmentsListPage: FC = () => {
         <div className='flex justify-between mb-10'>
           <h1>Departments</h1>
 
-          <Button>Create department</Button>
+          <Button asChild>
+            <Link to='/departments/create'>Create department</Link>
+          </Button>
         </div>
 
         <DepartmentsList />

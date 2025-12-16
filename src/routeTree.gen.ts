@@ -11,7 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as dashboardLayoutRouteRouteImport } from './routes/(dashboard)/_layout/route'
 import { Route as dashboardLayoutIndexRouteImport } from './routes/(dashboard)/_layout/index'
-import { Route as dashboardLayoutDepartmentsRouteImport } from './routes/(dashboard)/_layout/departments'
+import { Route as dashboardLayoutDepartmentsIndexRouteImport } from './routes/(dashboard)/_layout/departments/index'
+import { Route as dashboardLayoutDepartmentsCreateRouteImport } from './routes/(dashboard)/_layout/departments/create'
 
 const dashboardLayoutRouteRoute = dashboardLayoutRouteRouteImport.update({
   id: '/(dashboard)/_layout',
@@ -22,37 +23,47 @@ const dashboardLayoutIndexRoute = dashboardLayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => dashboardLayoutRouteRoute,
 } as any)
-const dashboardLayoutDepartmentsRoute =
-  dashboardLayoutDepartmentsRouteImport.update({
-    id: '/departments',
-    path: '/departments',
+const dashboardLayoutDepartmentsIndexRoute =
+  dashboardLayoutDepartmentsIndexRouteImport.update({
+    id: '/departments/',
+    path: '/departments/',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
+const dashboardLayoutDepartmentsCreateRoute =
+  dashboardLayoutDepartmentsCreateRouteImport.update({
+    id: '/departments/create',
+    path: '/departments/create',
     getParentRoute: () => dashboardLayoutRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/departments': typeof dashboardLayoutDepartmentsRoute
   '/': typeof dashboardLayoutIndexRoute
+  '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
+  '/departments': typeof dashboardLayoutDepartmentsIndexRoute
 }
 export interface FileRoutesByTo {
-  '/departments': typeof dashboardLayoutDepartmentsRoute
   '/': typeof dashboardLayoutIndexRoute
+  '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
+  '/departments': typeof dashboardLayoutDepartmentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(dashboard)/_layout': typeof dashboardLayoutRouteRouteWithChildren
-  '/(dashboard)/_layout/departments': typeof dashboardLayoutDepartmentsRoute
   '/(dashboard)/_layout/': typeof dashboardLayoutIndexRoute
+  '/(dashboard)/_layout/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
+  '/(dashboard)/_layout/departments/': typeof dashboardLayoutDepartmentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/departments' | '/'
+  fullPaths: '/' | '/departments/create' | '/departments'
   fileRoutesByTo: FileRoutesByTo
-  to: '/departments' | '/'
+  to: '/' | '/departments/create' | '/departments'
   id:
     | '__root__'
     | '/(dashboard)/_layout'
-    | '/(dashboard)/_layout/departments'
     | '/(dashboard)/_layout/'
+    | '/(dashboard)/_layout/departments/create'
+    | '/(dashboard)/_layout/departments/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -75,24 +86,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardLayoutIndexRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
-    '/(dashboard)/_layout/departments': {
-      id: '/(dashboard)/_layout/departments'
+    '/(dashboard)/_layout/departments/': {
+      id: '/(dashboard)/_layout/departments/'
       path: '/departments'
       fullPath: '/departments'
-      preLoaderRoute: typeof dashboardLayoutDepartmentsRouteImport
+      preLoaderRoute: typeof dashboardLayoutDepartmentsIndexRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
+    '/(dashboard)/_layout/departments/create': {
+      id: '/(dashboard)/_layout/departments/create'
+      path: '/departments/create'
+      fullPath: '/departments/create'
+      preLoaderRoute: typeof dashboardLayoutDepartmentsCreateRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
   }
 }
 
 interface dashboardLayoutRouteRouteChildren {
-  dashboardLayoutDepartmentsRoute: typeof dashboardLayoutDepartmentsRoute
   dashboardLayoutIndexRoute: typeof dashboardLayoutIndexRoute
+  dashboardLayoutDepartmentsCreateRoute: typeof dashboardLayoutDepartmentsCreateRoute
+  dashboardLayoutDepartmentsIndexRoute: typeof dashboardLayoutDepartmentsIndexRoute
 }
 
 const dashboardLayoutRouteRouteChildren: dashboardLayoutRouteRouteChildren = {
-  dashboardLayoutDepartmentsRoute: dashboardLayoutDepartmentsRoute,
   dashboardLayoutIndexRoute: dashboardLayoutIndexRoute,
+  dashboardLayoutDepartmentsCreateRoute: dashboardLayoutDepartmentsCreateRoute,
+  dashboardLayoutDepartmentsIndexRoute: dashboardLayoutDepartmentsIndexRoute,
 }
 
 const dashboardLayoutRouteRouteWithChildren =
