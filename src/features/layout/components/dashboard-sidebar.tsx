@@ -1,6 +1,13 @@
 import { FC } from 'react';
 import { PiBank, PiHouse } from 'react-icons/pi';
-import { Link } from '@tanstack/react-router';
+import { Link, LinkProps } from '@tanstack/react-router';
+import { IconType } from 'react-icons/lib';
+
+type TSidebarLink = {
+  title: string;
+  url: LinkProps['to'];
+  icon: IconType;
+};
 
 const items = [
   {
@@ -13,7 +20,12 @@ const items = [
     url: '/departments',
     icon: PiBank,
   },
-] as const;
+  {
+    title: 'Employees',
+    url: '/employees',
+    icon: PiBank,
+  },
+] satisfies Array<TSidebarLink>;
 
 export const DashboardSidebar: FC = () => {
   return (

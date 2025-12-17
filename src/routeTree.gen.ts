@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as dashboardLayoutRouteRouteImport } from './routes/(dashboard)/_layout/route'
 import { Route as dashboardLayoutIndexRouteImport } from './routes/(dashboard)/_layout/index'
+import { Route as dashboardLayoutEmployeesIndexRouteImport } from './routes/(dashboard)/_layout/employees/index'
 import { Route as dashboardLayoutDepartmentsIndexRouteImport } from './routes/(dashboard)/_layout/departments/index'
+import { Route as dashboardLayoutEmployeesCreateRouteImport } from './routes/(dashboard)/_layout/employees/create'
 import { Route as dashboardLayoutDepartmentsCreateRouteImport } from './routes/(dashboard)/_layout/departments/create'
 
 const dashboardLayoutRouteRoute = dashboardLayoutRouteRouteImport.update({
@@ -23,10 +25,22 @@ const dashboardLayoutIndexRoute = dashboardLayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => dashboardLayoutRouteRoute,
 } as any)
+const dashboardLayoutEmployeesIndexRoute =
+  dashboardLayoutEmployeesIndexRouteImport.update({
+    id: '/employees/',
+    path: '/employees/',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
 const dashboardLayoutDepartmentsIndexRoute =
   dashboardLayoutDepartmentsIndexRouteImport.update({
     id: '/departments/',
     path: '/departments/',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
+const dashboardLayoutEmployeesCreateRoute =
+  dashboardLayoutEmployeesCreateRouteImport.update({
+    id: '/employees/create',
+    path: '/employees/create',
     getParentRoute: () => dashboardLayoutRouteRoute,
   } as any)
 const dashboardLayoutDepartmentsCreateRoute =
@@ -39,31 +53,49 @@ const dashboardLayoutDepartmentsCreateRoute =
 export interface FileRoutesByFullPath {
   '/': typeof dashboardLayoutIndexRoute
   '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
+  '/employees/create': typeof dashboardLayoutEmployeesCreateRoute
   '/departments': typeof dashboardLayoutDepartmentsIndexRoute
+  '/employees': typeof dashboardLayoutEmployeesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof dashboardLayoutIndexRoute
   '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
+  '/employees/create': typeof dashboardLayoutEmployeesCreateRoute
   '/departments': typeof dashboardLayoutDepartmentsIndexRoute
+  '/employees': typeof dashboardLayoutEmployeesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(dashboard)/_layout': typeof dashboardLayoutRouteRouteWithChildren
   '/(dashboard)/_layout/': typeof dashboardLayoutIndexRoute
   '/(dashboard)/_layout/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
+  '/(dashboard)/_layout/employees/create': typeof dashboardLayoutEmployeesCreateRoute
   '/(dashboard)/_layout/departments/': typeof dashboardLayoutDepartmentsIndexRoute
+  '/(dashboard)/_layout/employees/': typeof dashboardLayoutEmployeesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/departments/create' | '/departments'
+  fullPaths:
+    | '/'
+    | '/departments/create'
+    | '/employees/create'
+    | '/departments'
+    | '/employees'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/departments/create' | '/departments'
+  to:
+    | '/'
+    | '/departments/create'
+    | '/employees/create'
+    | '/departments'
+    | '/employees'
   id:
     | '__root__'
     | '/(dashboard)/_layout'
     | '/(dashboard)/_layout/'
     | '/(dashboard)/_layout/departments/create'
+    | '/(dashboard)/_layout/employees/create'
     | '/(dashboard)/_layout/departments/'
+    | '/(dashboard)/_layout/employees/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -86,11 +118,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardLayoutIndexRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
+    '/(dashboard)/_layout/employees/': {
+      id: '/(dashboard)/_layout/employees/'
+      path: '/employees'
+      fullPath: '/employees'
+      preLoaderRoute: typeof dashboardLayoutEmployeesIndexRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
     '/(dashboard)/_layout/departments/': {
       id: '/(dashboard)/_layout/departments/'
       path: '/departments'
       fullPath: '/departments'
       preLoaderRoute: typeof dashboardLayoutDepartmentsIndexRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
+    '/(dashboard)/_layout/employees/create': {
+      id: '/(dashboard)/_layout/employees/create'
+      path: '/employees/create'
+      fullPath: '/employees/create'
+      preLoaderRoute: typeof dashboardLayoutEmployeesCreateRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
     '/(dashboard)/_layout/departments/create': {
@@ -106,13 +152,17 @@ declare module '@tanstack/react-router' {
 interface dashboardLayoutRouteRouteChildren {
   dashboardLayoutIndexRoute: typeof dashboardLayoutIndexRoute
   dashboardLayoutDepartmentsCreateRoute: typeof dashboardLayoutDepartmentsCreateRoute
+  dashboardLayoutEmployeesCreateRoute: typeof dashboardLayoutEmployeesCreateRoute
   dashboardLayoutDepartmentsIndexRoute: typeof dashboardLayoutDepartmentsIndexRoute
+  dashboardLayoutEmployeesIndexRoute: typeof dashboardLayoutEmployeesIndexRoute
 }
 
 const dashboardLayoutRouteRouteChildren: dashboardLayoutRouteRouteChildren = {
   dashboardLayoutIndexRoute: dashboardLayoutIndexRoute,
   dashboardLayoutDepartmentsCreateRoute: dashboardLayoutDepartmentsCreateRoute,
+  dashboardLayoutEmployeesCreateRoute: dashboardLayoutEmployeesCreateRoute,
   dashboardLayoutDepartmentsIndexRoute: dashboardLayoutDepartmentsIndexRoute,
+  dashboardLayoutEmployeesIndexRoute: dashboardLayoutEmployeesIndexRoute,
 }
 
 const dashboardLayoutRouteRouteWithChildren =
