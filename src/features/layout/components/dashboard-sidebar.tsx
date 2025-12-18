@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { PiBank, PiHouse } from 'react-icons/pi';
+import { BiCategoryAlt } from 'react-icons/bi';
 import { Link, LinkProps } from '@tanstack/react-router';
 import { IconType } from 'react-icons/lib';
 
@@ -24,6 +25,11 @@ const items = [
     title: 'Employees',
     url: '/employees',
     icon: PiBank,
+  },
+  {
+    title: 'Cost Heads',
+    url: '/cost-heads',
+    icon: BiCategoryAlt,
   },
 ] satisfies Array<TSidebarLink>;
 

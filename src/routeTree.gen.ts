@@ -13,8 +13,10 @@ import { Route as dashboardLayoutRouteRouteImport } from './routes/(dashboard)/_
 import { Route as dashboardLayoutIndexRouteImport } from './routes/(dashboard)/_layout/index'
 import { Route as dashboardLayoutEmployeesIndexRouteImport } from './routes/(dashboard)/_layout/employees/index'
 import { Route as dashboardLayoutDepartmentsIndexRouteImport } from './routes/(dashboard)/_layout/departments/index'
+import { Route as dashboardLayoutCostHeadsIndexRouteImport } from './routes/(dashboard)/_layout/cost-heads/index'
 import { Route as dashboardLayoutEmployeesCreateRouteImport } from './routes/(dashboard)/_layout/employees/create'
 import { Route as dashboardLayoutDepartmentsCreateRouteImport } from './routes/(dashboard)/_layout/departments/create'
+import { Route as dashboardLayoutCostHeadsCreateRouteImport } from './routes/(dashboard)/_layout/cost-heads/create'
 
 const dashboardLayoutRouteRoute = dashboardLayoutRouteRouteImport.update({
   id: '/(dashboard)/_layout',
@@ -37,6 +39,12 @@ const dashboardLayoutDepartmentsIndexRoute =
     path: '/departments/',
     getParentRoute: () => dashboardLayoutRouteRoute,
   } as any)
+const dashboardLayoutCostHeadsIndexRoute =
+  dashboardLayoutCostHeadsIndexRouteImport.update({
+    id: '/cost-heads/',
+    path: '/cost-heads/',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
 const dashboardLayoutEmployeesCreateRoute =
   dashboardLayoutEmployeesCreateRouteImport.update({
     id: '/employees/create',
@@ -49,18 +57,28 @@ const dashboardLayoutDepartmentsCreateRoute =
     path: '/departments/create',
     getParentRoute: () => dashboardLayoutRouteRoute,
   } as any)
+const dashboardLayoutCostHeadsCreateRoute =
+  dashboardLayoutCostHeadsCreateRouteImport.update({
+    id: '/cost-heads/create',
+    path: '/cost-heads/create',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof dashboardLayoutIndexRoute
+  '/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/cost-heads': typeof dashboardLayoutCostHeadsIndexRoute
   '/departments': typeof dashboardLayoutDepartmentsIndexRoute
   '/employees': typeof dashboardLayoutEmployeesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof dashboardLayoutIndexRoute
+  '/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/cost-heads': typeof dashboardLayoutCostHeadsIndexRoute
   '/departments': typeof dashboardLayoutDepartmentsIndexRoute
   '/employees': typeof dashboardLayoutEmployeesIndexRoute
 }
@@ -68,8 +86,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(dashboard)/_layout': typeof dashboardLayoutRouteRouteWithChildren
   '/(dashboard)/_layout/': typeof dashboardLayoutIndexRoute
+  '/(dashboard)/_layout/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/(dashboard)/_layout/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/(dashboard)/_layout/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/(dashboard)/_layout/cost-heads/': typeof dashboardLayoutCostHeadsIndexRoute
   '/(dashboard)/_layout/departments/': typeof dashboardLayoutDepartmentsIndexRoute
   '/(dashboard)/_layout/employees/': typeof dashboardLayoutEmployeesIndexRoute
 }
@@ -77,23 +97,29 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/cost-heads/create'
     | '/departments/create'
     | '/employees/create'
+    | '/cost-heads'
     | '/departments'
     | '/employees'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/cost-heads/create'
     | '/departments/create'
     | '/employees/create'
+    | '/cost-heads'
     | '/departments'
     | '/employees'
   id:
     | '__root__'
     | '/(dashboard)/_layout'
     | '/(dashboard)/_layout/'
+    | '/(dashboard)/_layout/cost-heads/create'
     | '/(dashboard)/_layout/departments/create'
     | '/(dashboard)/_layout/employees/create'
+    | '/(dashboard)/_layout/cost-heads/'
     | '/(dashboard)/_layout/departments/'
     | '/(dashboard)/_layout/employees/'
   fileRoutesById: FileRoutesById
@@ -132,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardLayoutDepartmentsIndexRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
+    '/(dashboard)/_layout/cost-heads/': {
+      id: '/(dashboard)/_layout/cost-heads/'
+      path: '/cost-heads'
+      fullPath: '/cost-heads'
+      preLoaderRoute: typeof dashboardLayoutCostHeadsIndexRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
     '/(dashboard)/_layout/employees/create': {
       id: '/(dashboard)/_layout/employees/create'
       path: '/employees/create'
@@ -146,21 +179,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardLayoutDepartmentsCreateRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
+    '/(dashboard)/_layout/cost-heads/create': {
+      id: '/(dashboard)/_layout/cost-heads/create'
+      path: '/cost-heads/create'
+      fullPath: '/cost-heads/create'
+      preLoaderRoute: typeof dashboardLayoutCostHeadsCreateRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
   }
 }
 
 interface dashboardLayoutRouteRouteChildren {
   dashboardLayoutIndexRoute: typeof dashboardLayoutIndexRoute
+  dashboardLayoutCostHeadsCreateRoute: typeof dashboardLayoutCostHeadsCreateRoute
   dashboardLayoutDepartmentsCreateRoute: typeof dashboardLayoutDepartmentsCreateRoute
   dashboardLayoutEmployeesCreateRoute: typeof dashboardLayoutEmployeesCreateRoute
+  dashboardLayoutCostHeadsIndexRoute: typeof dashboardLayoutCostHeadsIndexRoute
   dashboardLayoutDepartmentsIndexRoute: typeof dashboardLayoutDepartmentsIndexRoute
   dashboardLayoutEmployeesIndexRoute: typeof dashboardLayoutEmployeesIndexRoute
 }
 
 const dashboardLayoutRouteRouteChildren: dashboardLayoutRouteRouteChildren = {
   dashboardLayoutIndexRoute: dashboardLayoutIndexRoute,
+  dashboardLayoutCostHeadsCreateRoute: dashboardLayoutCostHeadsCreateRoute,
   dashboardLayoutDepartmentsCreateRoute: dashboardLayoutDepartmentsCreateRoute,
   dashboardLayoutEmployeesCreateRoute: dashboardLayoutEmployeesCreateRoute,
+  dashboardLayoutCostHeadsIndexRoute: dashboardLayoutCostHeadsIndexRoute,
   dashboardLayoutDepartmentsIndexRoute: dashboardLayoutDepartmentsIndexRoute,
   dashboardLayoutEmployeesIndexRoute: dashboardLayoutEmployeesIndexRoute,
 }
