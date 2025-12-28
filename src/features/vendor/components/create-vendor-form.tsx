@@ -119,8 +119,8 @@ export const CreateVendorForm: FC = () => {
                 <SelectItem value='NON_TECHNICAL_SUBSCRIPTION'>
                   Non-Technical Subscription
                 </SelectItem>
-                <SelectItem value='CLOUD_INFRASTRUCTURE'>
-                  Cloud Infrastructure
+                <SelectItem value='ONE_TIME'>
+                  One Time
                 </SelectItem>
                 <SelectItem value='OTHER'>Other</SelectItem>
               </SelectContent>
