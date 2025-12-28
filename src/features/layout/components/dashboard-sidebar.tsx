@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { PiBank, PiHouse } from 'react-icons/pi';
+import { PiBank, PiHouse, PiUserCircle } from 'react-icons/pi';
 import { BiCategoryAlt } from 'react-icons/bi';
+import { GoOrganization } from 'react-icons/go';
 import { Link, LinkProps } from '@tanstack/react-router';
 import { IconType } from 'react-icons/lib';
 
@@ -24,12 +25,17 @@ const items = [
   {
     title: 'Employees',
     url: '/employees',
-    icon: PiBank,
+    icon: PiUserCircle,
   },
   {
     title: 'Cost Heads',
     url: '/cost-heads',
     icon: BiCategoryAlt,
+  },
+  {
+    title: 'Companies',
+    url: '/companies',
+    icon: GoOrganization,
   },
 ] satisfies Array<TSidebarLink>;
 

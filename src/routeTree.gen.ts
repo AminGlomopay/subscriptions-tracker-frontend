@@ -14,9 +14,11 @@ import { Route as dashboardLayoutIndexRouteImport } from './routes/(dashboard)/_
 import { Route as dashboardLayoutEmployeesIndexRouteImport } from './routes/(dashboard)/_layout/employees/index'
 import { Route as dashboardLayoutDepartmentsIndexRouteImport } from './routes/(dashboard)/_layout/departments/index'
 import { Route as dashboardLayoutCostHeadsIndexRouteImport } from './routes/(dashboard)/_layout/cost-heads/index'
+import { Route as dashboardLayoutCompaniesIndexRouteImport } from './routes/(dashboard)/_layout/companies/index'
 import { Route as dashboardLayoutEmployeesCreateRouteImport } from './routes/(dashboard)/_layout/employees/create'
 import { Route as dashboardLayoutDepartmentsCreateRouteImport } from './routes/(dashboard)/_layout/departments/create'
 import { Route as dashboardLayoutCostHeadsCreateRouteImport } from './routes/(dashboard)/_layout/cost-heads/create'
+import { Route as dashboardLayoutCompaniesCreateRouteImport } from './routes/(dashboard)/_layout/companies/create'
 
 const dashboardLayoutRouteRoute = dashboardLayoutRouteRouteImport.update({
   id: '/(dashboard)/_layout',
@@ -45,6 +47,12 @@ const dashboardLayoutCostHeadsIndexRoute =
     path: '/cost-heads/',
     getParentRoute: () => dashboardLayoutRouteRoute,
   } as any)
+const dashboardLayoutCompaniesIndexRoute =
+  dashboardLayoutCompaniesIndexRouteImport.update({
+    id: '/companies/',
+    path: '/companies/',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
 const dashboardLayoutEmployeesCreateRoute =
   dashboardLayoutEmployeesCreateRouteImport.update({
     id: '/employees/create',
@@ -63,21 +71,31 @@ const dashboardLayoutCostHeadsCreateRoute =
     path: '/cost-heads/create',
     getParentRoute: () => dashboardLayoutRouteRoute,
   } as any)
+const dashboardLayoutCompaniesCreateRoute =
+  dashboardLayoutCompaniesCreateRouteImport.update({
+    id: '/companies/create',
+    path: '/companies/create',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof dashboardLayoutIndexRoute
+  '/companies/create': typeof dashboardLayoutCompaniesCreateRoute
   '/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/companies': typeof dashboardLayoutCompaniesIndexRoute
   '/cost-heads': typeof dashboardLayoutCostHeadsIndexRoute
   '/departments': typeof dashboardLayoutDepartmentsIndexRoute
   '/employees': typeof dashboardLayoutEmployeesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof dashboardLayoutIndexRoute
+  '/companies/create': typeof dashboardLayoutCompaniesCreateRoute
   '/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/companies': typeof dashboardLayoutCompaniesIndexRoute
   '/cost-heads': typeof dashboardLayoutCostHeadsIndexRoute
   '/departments': typeof dashboardLayoutDepartmentsIndexRoute
   '/employees': typeof dashboardLayoutEmployeesIndexRoute
@@ -86,9 +104,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(dashboard)/_layout': typeof dashboardLayoutRouteRouteWithChildren
   '/(dashboard)/_layout/': typeof dashboardLayoutIndexRoute
+  '/(dashboard)/_layout/companies/create': typeof dashboardLayoutCompaniesCreateRoute
   '/(dashboard)/_layout/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/(dashboard)/_layout/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/(dashboard)/_layout/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/(dashboard)/_layout/companies/': typeof dashboardLayoutCompaniesIndexRoute
   '/(dashboard)/_layout/cost-heads/': typeof dashboardLayoutCostHeadsIndexRoute
   '/(dashboard)/_layout/departments/': typeof dashboardLayoutDepartmentsIndexRoute
   '/(dashboard)/_layout/employees/': typeof dashboardLayoutEmployeesIndexRoute
@@ -97,18 +117,22 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/companies/create'
     | '/cost-heads/create'
     | '/departments/create'
     | '/employees/create'
+    | '/companies'
     | '/cost-heads'
     | '/departments'
     | '/employees'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/companies/create'
     | '/cost-heads/create'
     | '/departments/create'
     | '/employees/create'
+    | '/companies'
     | '/cost-heads'
     | '/departments'
     | '/employees'
@@ -116,9 +140,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/(dashboard)/_layout'
     | '/(dashboard)/_layout/'
+    | '/(dashboard)/_layout/companies/create'
     | '/(dashboard)/_layout/cost-heads/create'
     | '/(dashboard)/_layout/departments/create'
     | '/(dashboard)/_layout/employees/create'
+    | '/(dashboard)/_layout/companies/'
     | '/(dashboard)/_layout/cost-heads/'
     | '/(dashboard)/_layout/departments/'
     | '/(dashboard)/_layout/employees/'
@@ -165,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardLayoutCostHeadsIndexRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
+    '/(dashboard)/_layout/companies/': {
+      id: '/(dashboard)/_layout/companies/'
+      path: '/companies'
+      fullPath: '/companies'
+      preLoaderRoute: typeof dashboardLayoutCompaniesIndexRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
     '/(dashboard)/_layout/employees/create': {
       id: '/(dashboard)/_layout/employees/create'
       path: '/employees/create'
@@ -186,14 +219,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof dashboardLayoutCostHeadsCreateRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
+    '/(dashboard)/_layout/companies/create': {
+      id: '/(dashboard)/_layout/companies/create'
+      path: '/companies/create'
+      fullPath: '/companies/create'
+      preLoaderRoute: typeof dashboardLayoutCompaniesCreateRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
   }
 }
 
 interface dashboardLayoutRouteRouteChildren {
   dashboardLayoutIndexRoute: typeof dashboardLayoutIndexRoute
+  dashboardLayoutCompaniesCreateRoute: typeof dashboardLayoutCompaniesCreateRoute
   dashboardLayoutCostHeadsCreateRoute: typeof dashboardLayoutCostHeadsCreateRoute
   dashboardLayoutDepartmentsCreateRoute: typeof dashboardLayoutDepartmentsCreateRoute
   dashboardLayoutEmployeesCreateRoute: typeof dashboardLayoutEmployeesCreateRoute
+  dashboardLayoutCompaniesIndexRoute: typeof dashboardLayoutCompaniesIndexRoute
   dashboardLayoutCostHeadsIndexRoute: typeof dashboardLayoutCostHeadsIndexRoute
   dashboardLayoutDepartmentsIndexRoute: typeof dashboardLayoutDepartmentsIndexRoute
   dashboardLayoutEmployeesIndexRoute: typeof dashboardLayoutEmployeesIndexRoute
@@ -201,9 +243,11 @@ interface dashboardLayoutRouteRouteChildren {
 
 const dashboardLayoutRouteRouteChildren: dashboardLayoutRouteRouteChildren = {
   dashboardLayoutIndexRoute: dashboardLayoutIndexRoute,
+  dashboardLayoutCompaniesCreateRoute: dashboardLayoutCompaniesCreateRoute,
   dashboardLayoutCostHeadsCreateRoute: dashboardLayoutCostHeadsCreateRoute,
   dashboardLayoutDepartmentsCreateRoute: dashboardLayoutDepartmentsCreateRoute,
   dashboardLayoutEmployeesCreateRoute: dashboardLayoutEmployeesCreateRoute,
+  dashboardLayoutCompaniesIndexRoute: dashboardLayoutCompaniesIndexRoute,
   dashboardLayoutCostHeadsIndexRoute: dashboardLayoutCostHeadsIndexRoute,
   dashboardLayoutDepartmentsIndexRoute: dashboardLayoutDepartmentsIndexRoute,
   dashboardLayoutEmployeesIndexRoute: dashboardLayoutEmployeesIndexRoute,
