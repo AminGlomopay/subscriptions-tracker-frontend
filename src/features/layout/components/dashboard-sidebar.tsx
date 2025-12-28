@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { PiBank, PiHouse, PiUserCircle, PiStorefront } from 'react-icons/pi';
+import { PiBank, PiHouse, PiUserCircle, PiStorefront, PiReceiptLight } from 'react-icons/pi';
 import { BiCategoryAlt } from 'react-icons/bi';
 import { GoOrganization } from 'react-icons/go';
 import { Link, LinkProps } from '@tanstack/react-router';
@@ -41,6 +41,11 @@ const items = [
     title: 'Vendors',
     url: '/vendors',
     icon: PiStorefront,
+  },
+  {
+    title: 'Invoices',
+    url: '/invoices',
+    icon: PiReceiptLight,
   },
 ] satisfies Array<TSidebarLink>;
 

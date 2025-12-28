@@ -12,11 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as dashboardLayoutRouteRouteImport } from './routes/(dashboard)/_layout/route'
 import { Route as dashboardLayoutIndexRouteImport } from './routes/(dashboard)/_layout/index'
 import { Route as dashboardLayoutVendorsIndexRouteImport } from './routes/(dashboard)/_layout/vendors/index'
+import { Route as dashboardLayoutInvoicesIndexRouteImport } from './routes/(dashboard)/_layout/invoices/index'
 import { Route as dashboardLayoutEmployeesIndexRouteImport } from './routes/(dashboard)/_layout/employees/index'
 import { Route as dashboardLayoutDepartmentsIndexRouteImport } from './routes/(dashboard)/_layout/departments/index'
 import { Route as dashboardLayoutCostHeadsIndexRouteImport } from './routes/(dashboard)/_layout/cost-heads/index'
 import { Route as dashboardLayoutCompaniesIndexRouteImport } from './routes/(dashboard)/_layout/companies/index'
 import { Route as dashboardLayoutVendorsCreateRouteImport } from './routes/(dashboard)/_layout/vendors/create'
+import { Route as dashboardLayoutInvoicesCreateRouteImport } from './routes/(dashboard)/_layout/invoices/create'
 import { Route as dashboardLayoutEmployeesCreateRouteImport } from './routes/(dashboard)/_layout/employees/create'
 import { Route as dashboardLayoutDepartmentsCreateRouteImport } from './routes/(dashboard)/_layout/departments/create'
 import { Route as dashboardLayoutCostHeadsCreateRouteImport } from './routes/(dashboard)/_layout/cost-heads/create'
@@ -35,6 +37,12 @@ const dashboardLayoutVendorsIndexRoute =
   dashboardLayoutVendorsIndexRouteImport.update({
     id: '/vendors/',
     path: '/vendors/',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
+const dashboardLayoutInvoicesIndexRoute =
+  dashboardLayoutInvoicesIndexRouteImport.update({
+    id: '/invoices/',
+    path: '/invoices/',
     getParentRoute: () => dashboardLayoutRouteRoute,
   } as any)
 const dashboardLayoutEmployeesIndexRoute =
@@ -65,6 +73,12 @@ const dashboardLayoutVendorsCreateRoute =
   dashboardLayoutVendorsCreateRouteImport.update({
     id: '/vendors/create',
     path: '/vendors/create',
+    getParentRoute: () => dashboardLayoutRouteRoute,
+  } as any)
+const dashboardLayoutInvoicesCreateRoute =
+  dashboardLayoutInvoicesCreateRouteImport.update({
+    id: '/invoices/create',
+    path: '/invoices/create',
     getParentRoute: () => dashboardLayoutRouteRoute,
   } as any)
 const dashboardLayoutEmployeesCreateRoute =
@@ -98,11 +112,13 @@ export interface FileRoutesByFullPath {
   '/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/invoices/create': typeof dashboardLayoutInvoicesCreateRoute
   '/vendors/create': typeof dashboardLayoutVendorsCreateRoute
   '/companies': typeof dashboardLayoutCompaniesIndexRoute
   '/cost-heads': typeof dashboardLayoutCostHeadsIndexRoute
   '/departments': typeof dashboardLayoutDepartmentsIndexRoute
   '/employees': typeof dashboardLayoutEmployeesIndexRoute
+  '/invoices': typeof dashboardLayoutInvoicesIndexRoute
   '/vendors': typeof dashboardLayoutVendorsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -111,11 +127,13 @@ export interface FileRoutesByTo {
   '/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/invoices/create': typeof dashboardLayoutInvoicesCreateRoute
   '/vendors/create': typeof dashboardLayoutVendorsCreateRoute
   '/companies': typeof dashboardLayoutCompaniesIndexRoute
   '/cost-heads': typeof dashboardLayoutCostHeadsIndexRoute
   '/departments': typeof dashboardLayoutDepartmentsIndexRoute
   '/employees': typeof dashboardLayoutEmployeesIndexRoute
+  '/invoices': typeof dashboardLayoutInvoicesIndexRoute
   '/vendors': typeof dashboardLayoutVendorsIndexRoute
 }
 export interface FileRoutesById {
@@ -126,11 +144,13 @@ export interface FileRoutesById {
   '/(dashboard)/_layout/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
   '/(dashboard)/_layout/departments/create': typeof dashboardLayoutDepartmentsCreateRoute
   '/(dashboard)/_layout/employees/create': typeof dashboardLayoutEmployeesCreateRoute
+  '/(dashboard)/_layout/invoices/create': typeof dashboardLayoutInvoicesCreateRoute
   '/(dashboard)/_layout/vendors/create': typeof dashboardLayoutVendorsCreateRoute
   '/(dashboard)/_layout/companies/': typeof dashboardLayoutCompaniesIndexRoute
   '/(dashboard)/_layout/cost-heads/': typeof dashboardLayoutCostHeadsIndexRoute
   '/(dashboard)/_layout/departments/': typeof dashboardLayoutDepartmentsIndexRoute
   '/(dashboard)/_layout/employees/': typeof dashboardLayoutEmployeesIndexRoute
+  '/(dashboard)/_layout/invoices/': typeof dashboardLayoutInvoicesIndexRoute
   '/(dashboard)/_layout/vendors/': typeof dashboardLayoutVendorsIndexRoute
 }
 export interface FileRouteTypes {
@@ -141,11 +161,13 @@ export interface FileRouteTypes {
     | '/cost-heads/create'
     | '/departments/create'
     | '/employees/create'
+    | '/invoices/create'
     | '/vendors/create'
     | '/companies'
     | '/cost-heads'
     | '/departments'
     | '/employees'
+    | '/invoices'
     | '/vendors'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,11 +176,13 @@ export interface FileRouteTypes {
     | '/cost-heads/create'
     | '/departments/create'
     | '/employees/create'
+    | '/invoices/create'
     | '/vendors/create'
     | '/companies'
     | '/cost-heads'
     | '/departments'
     | '/employees'
+    | '/invoices'
     | '/vendors'
   id:
     | '__root__'
@@ -168,11 +192,13 @@ export interface FileRouteTypes {
     | '/(dashboard)/_layout/cost-heads/create'
     | '/(dashboard)/_layout/departments/create'
     | '/(dashboard)/_layout/employees/create'
+    | '/(dashboard)/_layout/invoices/create'
     | '/(dashboard)/_layout/vendors/create'
     | '/(dashboard)/_layout/companies/'
     | '/(dashboard)/_layout/cost-heads/'
     | '/(dashboard)/_layout/departments/'
     | '/(dashboard)/_layout/employees/'
+    | '/(dashboard)/_layout/invoices/'
     | '/(dashboard)/_layout/vendors/'
   fileRoutesById: FileRoutesById
 }
@@ -201,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/vendors'
       fullPath: '/vendors'
       preLoaderRoute: typeof dashboardLayoutVendorsIndexRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
+    '/(dashboard)/_layout/invoices/': {
+      id: '/(dashboard)/_layout/invoices/'
+      path: '/invoices'
+      fullPath: '/invoices'
+      preLoaderRoute: typeof dashboardLayoutInvoicesIndexRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
     '/(dashboard)/_layout/employees/': {
@@ -236,6 +269,13 @@ declare module '@tanstack/react-router' {
       path: '/vendors/create'
       fullPath: '/vendors/create'
       preLoaderRoute: typeof dashboardLayoutVendorsCreateRouteImport
+      parentRoute: typeof dashboardLayoutRouteRoute
+    }
+    '/(dashboard)/_layout/invoices/create': {
+      id: '/(dashboard)/_layout/invoices/create'
+      path: '/invoices/create'
+      fullPath: '/invoices/create'
+      preLoaderRoute: typeof dashboardLayoutInvoicesCreateRouteImport
       parentRoute: typeof dashboardLayoutRouteRoute
     }
     '/(dashboard)/_layout/employees/create': {
@@ -275,11 +315,13 @@ interface dashboardLayoutRouteRouteChildren {
   dashboardLayoutCostHeadsCreateRoute: typeof dashboardLayoutCostHeadsCreateRoute
   dashboardLayoutDepartmentsCreateRoute: typeof dashboardLayoutDepartmentsCreateRoute
   dashboardLayoutEmployeesCreateRoute: typeof dashboardLayoutEmployeesCreateRoute
+  dashboardLayoutInvoicesCreateRoute: typeof dashboardLayoutInvoicesCreateRoute
   dashboardLayoutVendorsCreateRoute: typeof dashboardLayoutVendorsCreateRoute
   dashboardLayoutCompaniesIndexRoute: typeof dashboardLayoutCompaniesIndexRoute
   dashboardLayoutCostHeadsIndexRoute: typeof dashboardLayoutCostHeadsIndexRoute
   dashboardLayoutDepartmentsIndexRoute: typeof dashboardLayoutDepartmentsIndexRoute
   dashboardLayoutEmployeesIndexRoute: typeof dashboardLayoutEmployeesIndexRoute
+  dashboardLayoutInvoicesIndexRoute: typeof dashboardLayoutInvoicesIndexRoute
   dashboardLayoutVendorsIndexRoute: typeof dashboardLayoutVendorsIndexRoute
 }
 
@@ -289,11 +331,13 @@ const dashboardLayoutRouteRouteChildren: dashboardLayoutRouteRouteChildren = {
   dashboardLayoutCostHeadsCreateRoute: dashboardLayoutCostHeadsCreateRoute,
   dashboardLayoutDepartmentsCreateRoute: dashboardLayoutDepartmentsCreateRoute,
   dashboardLayoutEmployeesCreateRoute: dashboardLayoutEmployeesCreateRoute,
+  dashboardLayoutInvoicesCreateRoute: dashboardLayoutInvoicesCreateRoute,
   dashboardLayoutVendorsCreateRoute: dashboardLayoutVendorsCreateRoute,
   dashboardLayoutCompaniesIndexRoute: dashboardLayoutCompaniesIndexRoute,
   dashboardLayoutCostHeadsIndexRoute: dashboardLayoutCostHeadsIndexRoute,
   dashboardLayoutDepartmentsIndexRoute: dashboardLayoutDepartmentsIndexRoute,
   dashboardLayoutEmployeesIndexRoute: dashboardLayoutEmployeesIndexRoute,
+  dashboardLayoutInvoicesIndexRoute: dashboardLayoutInvoicesIndexRoute,
   dashboardLayoutVendorsIndexRoute: dashboardLayoutVendorsIndexRoute,
 }
 
