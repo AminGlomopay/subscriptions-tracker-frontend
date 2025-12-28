@@ -10,7 +10,7 @@ import {
   TCreateEmployeeSchema,
 } from '../validations/employee.validation';
 import { useCreateEmployee } from '../hooks/use-create-employee';
-import { useDepartments } from '@/features/department/hooks/use-departments';
+import { useDepartments } from '@/features/department/public';
 
 export const CreateEmployeeForm: FC = () => {
   const navigate = useNavigate();
