@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from '@tanstack/react-router';
@@ -36,20 +36,9 @@ export const CreateInvoiceForm: FC = () => {
     formState: { errors },
     reset,
     control,
-    watch,
-    setValue,
   } = useForm<TCreateInvoiceSchema>({
     resolver: zodResolver(createInvoiceSchema),
   });
-
-  const invoiceAmount = watch('invoiceAmount');
-  const taxAmount = watch('taxAmount');
-
-  useEffect(() => {
-    const invoice = invoiceAmount || 0;
-    const tax = taxAmount || 0;
-    setValue('totalAmount', invoice + tax);
-  }, [invoiceAmount, taxAmount, setValue]);
 
   const onSubmit = (data: TCreateInvoiceSchema) => {
     const formattedData = {
@@ -132,23 +121,6 @@ export const CreateInvoiceForm: FC = () => {
         />
         {errors.taxAmount && (
           <p className='text-sm text-destructive'>{errors.taxAmount.message}</p>
-        )}
-      </div>
-
-      <div className='space-y-2'>
-        <label htmlFor='totalAmount' className='text-sm font-medium'>
-          Total Amount
-        </label>
-        <Input
-          id='totalAmount'
-          type='number'
-          placeholder='Total amount'
-          {...register('totalAmount', { valueAsNumber: true })}
-          aria-invalid={!!errors.totalAmount}
-          readOnly
-        />
-        {errors.totalAmount && (
-          <p className='text-sm text-destructive'>{errors.totalAmount.message}</p>
         )}
       </div>
 
