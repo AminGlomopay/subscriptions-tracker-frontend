@@ -1,7 +1,15 @@
 import { DashboardLayout } from '@/features/layout/public';
-import { Outlet, createFileRoute } from '@tanstack/react-router';
+import { Outlet, createFileRoute, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/(dashboard)/_layout')({
+  beforeLoad: ({ context, location }) => {
+    if (!context.auth.isAuthenticated) {
+      throw redirect({
+        to: '/login',
+        search: { redirect: location.href },
+      });
+    }
+  },
   component: LayoutComponent,
 });
 

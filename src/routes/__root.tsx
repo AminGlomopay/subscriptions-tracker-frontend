@@ -1,16 +1,20 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router';
+import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import '../styles/index.css';
-import { QueryClientProvider } from '@/shared/query-client/public';
+import type { TAuthContext } from '@/features/auth/public';
+
+interface RouterContext {
+  auth: TAuthContext;
+}
 
 const RootLayout = () => (
-  <QueryClientProvider>
+  <>
     <Outlet />
     <TanStackRouterDevtools />
     <ReactQueryDevtools />
-  </QueryClientProvider>
+  </>
 );
 
-export const Route = createRootRoute({ component: RootLayout });
+export const Route = createRootRouteWithContext<RouterContext>()({ component: RootLayout });

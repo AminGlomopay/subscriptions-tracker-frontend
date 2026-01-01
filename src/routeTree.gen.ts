@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as dashboardLayoutRouteRouteImport } from './routes/(dashboard)/_layout/route'
 import { Route as dashboardLayoutIndexRouteImport } from './routes/(dashboard)/_layout/index'
 import { Route as dashboardLayoutVendorsIndexRouteImport } from './routes/(dashboard)/_layout/vendors/index'
@@ -24,6 +25,11 @@ import { Route as dashboardLayoutDepartmentsCreateRouteImport } from './routes/(
 import { Route as dashboardLayoutCostHeadsCreateRouteImport } from './routes/(dashboard)/_layout/cost-heads/create'
 import { Route as dashboardLayoutCompaniesCreateRouteImport } from './routes/(dashboard)/_layout/companies/create'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const dashboardLayoutRouteRoute = dashboardLayoutRouteRouteImport.update({
   id: '/(dashboard)/_layout',
   getParentRoute: () => rootRouteImport,
@@ -107,6 +113,7 @@ const dashboardLayoutCompaniesCreateRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/login': typeof LoginRoute
   '/': typeof dashboardLayoutIndexRoute
   '/companies/create': typeof dashboardLayoutCompaniesCreateRoute
   '/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/vendors': typeof dashboardLayoutVendorsIndexRoute
 }
 export interface FileRoutesByTo {
+  '/login': typeof LoginRoute
   '/': typeof dashboardLayoutIndexRoute
   '/companies/create': typeof dashboardLayoutCompaniesCreateRoute
   '/cost-heads/create': typeof dashboardLayoutCostHeadsCreateRoute
@@ -138,6 +146,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/login': typeof LoginRoute
   '/(dashboard)/_layout': typeof dashboardLayoutRouteRouteWithChildren
   '/(dashboard)/_layout/': typeof dashboardLayoutIndexRoute
   '/(dashboard)/_layout/companies/create': typeof dashboardLayoutCompaniesCreateRoute
@@ -156,6 +165,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/login'
     | '/'
     | '/companies/create'
     | '/cost-heads/create'
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/vendors'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/login'
     | '/'
     | '/companies/create'
     | '/cost-heads/create'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/vendors'
   id:
     | '__root__'
+    | '/login'
     | '/(dashboard)/_layout'
     | '/(dashboard)/_layout/'
     | '/(dashboard)/_layout/companies/create'
@@ -203,11 +215,19 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  LoginRoute: typeof LoginRoute
   dashboardLayoutRouteRoute: typeof dashboardLayoutRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(dashboard)/_layout': {
       id: '/(dashboard)/_layout'
       path: ''
@@ -345,6 +365,7 @@ const dashboardLayoutRouteRouteWithChildren =
   dashboardLayoutRouteRoute._addFileChildren(dashboardLayoutRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
+  LoginRoute: LoginRoute,
   dashboardLayoutRouteRoute: dashboardLayoutRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
