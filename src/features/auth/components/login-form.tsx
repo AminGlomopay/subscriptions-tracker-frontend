@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useNavigate, useSearch, useRouter } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -13,6 +13,7 @@ import { authQueryKeys } from '../constants';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+  const router = useRouter();
   const search = useSearch({ from: '/login' });
   const { mutate: login, isPending } = useLogin();
   const queryClient = useQueryClient();
@@ -31,9 +32,10 @@ export const LoginForm = () => {
 
   const onSubmit = (data: TLoginSchema) => {
     login(data, {
-      onSuccess: (response) => {
+      onSuccess: async (response) => {
         queryClient.setQueryData([authQueryKeys.currentUser], response.user);
         toast.success('Login successful');
+        await router.invalidate();
         navigate({ to: search.redirect || '/' });
       },
       onError: (error) => {
