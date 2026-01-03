@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate, useSearch, useRouter } from '@tanstack/react-router';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -13,7 +13,6 @@ import { authQueryKeys } from '../constants';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  const router = useRouter();
   const search = useSearch({ from: '/login' });
   const { mutate: login, isPending } = useLogin();
   const queryClient = useQueryClient();
@@ -35,7 +34,6 @@ export const LoginForm = () => {
       onSuccess: async (response) => {
         queryClient.setQueryData([authQueryKeys.currentUser], response.user);
         toast.success('Login successful');
-        await router.invalidate();
         navigate({ to: search.redirect || '/' });
       },
       onError: (error) => {
@@ -45,7 +43,10 @@ export const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='space-y-4 w-full max-w-sm'>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className='space-y-4 w-full max-w-sm'
+    >
       <div className='space-y-2'>
         <Label htmlFor='email'>Email</Label>
         <Input

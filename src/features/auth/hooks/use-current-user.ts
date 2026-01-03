@@ -1,14 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
+
 import { getCurrentUser } from '../apis/auth.api';
 import { authQueryKeys } from '../constants';
 
-const FIVE_MINUTES_IN_MS = 5 * 60 * 1000;
-
 export const useCurrentUser = () => {
-  return useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: [authQueryKeys.currentUser],
     queryFn: getCurrentUser,
     retry: false,
-    staleTime: FIVE_MINUTES_IN_MS,
+    staleTime: Infinity,
+    gcTime: Infinity,
   });
+
+  return { user: data };
 };

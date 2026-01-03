@@ -19,9 +19,3 @@ export type TLoginResponse = {
   refreshToken: string;
   user: TUser;
 };
-
-export type TAuthContext = {
-  isAuthenticated: boolean;
-  user: TUser | null;
-  isLoading: boolean;
-};

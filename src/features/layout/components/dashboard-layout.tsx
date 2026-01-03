@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import { Outlet } from '@tanstack/react-router';
+
 import { DashboardSidebar } from './dashboard-sidebar';
 import { DashboardTopBar } from './dashboard-top-bar';
 
